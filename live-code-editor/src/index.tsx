@@ -1,12 +1,38 @@
+import * as esbuild from "esbuild-wasm";
+import { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom/client";
-import { useState } from "react";
+import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 
 const App = () => {
+  const ref = useRef<any>();
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
 
-  const showOutput = () => {
-    console.log(input);
+  const startService = async () => {
+    ref.current = await esbuild.startService({
+      worker: true,
+      wasmURL: "/esbuild.wasm",
+    });
+  };
+  useEffect(() => {
+    startService();
+  }, []);
+
+  const onClick = async () => {
+    if (!ref.current) {
+      return;
+    }
+
+    const result = await ref.current.build({
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin()],
+    });
+
+    // console.log(result);
+
+    setCode(result.outputFiles[0].text);
   };
 
   return (
@@ -16,14 +42,12 @@ const App = () => {
         onChange={(e) => setInput(e.target.value)}
       ></textarea>
       <div>
-        <button onClick={showOutput}>Submit</button>
+        <button onClick={onClick}>Submit</button>
       </div>
       <pre>{code}</pre>
     </div>
   );
 };
-
-// const root = ReactDOM.createRoot(document.getElementById("root"));
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement as Element);
 
