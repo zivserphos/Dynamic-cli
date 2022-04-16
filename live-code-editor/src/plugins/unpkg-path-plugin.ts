@@ -1,11 +1,7 @@
 import * as esbuild from "esbuild-wasm";
-import axios from "axios";
-import localforage from "localforage";
 
-const fileCache = localforage.createInstance({ name: "filecache" });
-
+// this plugin is respobsible for find the path to our necessary files inside unpkg.com
 export const unpkgPathPlugin = () => {
-  console.log("asasas");
   return {
     name: "unpkg-path-plugin",
     setup(build: esbuild.PluginBuild) {
