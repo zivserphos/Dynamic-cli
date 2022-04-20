@@ -1,7 +1,7 @@
 import * as esbuild from "esbuild-wasm";
 import localforage from "localforage";
 import axios from "axios";
-import escapedString from "../utils/escaped";
+import escapedString from "../../utils/escaped";
 
 const fileCache = localforage.createInstance({ name: "filecache" });
 

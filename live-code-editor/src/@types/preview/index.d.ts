@@ -1,0 +1,3 @@
+interface PreviewProps {
+  code: string;
+}
