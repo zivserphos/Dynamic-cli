@@ -1,9 +1,16 @@
 // import { ResizeHandle } from "react-resizable";
 
+// import { ResizeHandle } from "react-resizable";
+
 interface ResizableProps {
   direction: "horizontal" | "vertical";
   children: any;
-  width: number;
-  height: number;
-  resizeHandles: ResizeHandle[];
 }
+
+// interface ResizableBoxProps {
+//   height: number;
+//   width: number;
+//   resizeHandles: any;
+//   minConstraints: number[];
+//   maxConstraints: number[];
+// }

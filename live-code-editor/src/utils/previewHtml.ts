@@ -1,6 +1,8 @@
 const previewHtml = `
      <html>
-      <head></head>
+      <head>
+        <style>html {backgroundColor:"white"}</style>
+      </head>
       <body>
         <div id="root"></div>
         <script>
