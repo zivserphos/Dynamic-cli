@@ -16,7 +16,6 @@ const CodeEditor: React.FC<codeEditorProps> = ({ initialValue, onChange }) => {
     editorRef.current = monacoEditor;
     monacoEditor.onDidChangeModelContent(() => onChange(getValue()));
     monacoEditor.getModel()?.updateOptions({ tabSize: 3 });
-    console.log(codeshift, monacoEditor);
     const highlighter = new HighLighter(
       ///@ts-ignore
       window.monaco,
@@ -44,6 +43,7 @@ const CodeEditor: React.FC<codeEditorProps> = ({ initialValue, onChange }) => {
 
   useEffect(() => {
     const handlekeyDown = (event: KeyboardEvent) => {
+      console.log(event.code);
       if (event.ctrlKey && !isCtrlPressed.current) isCtrlPressed.current = true;
       if (isCtrlPressed.current && event.code === "KeyS") {
         event.preventDefault();

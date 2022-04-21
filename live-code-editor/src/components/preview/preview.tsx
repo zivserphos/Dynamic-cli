@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import previewHtml from "../../utils/previewHtml";
 import "./preview.scss";
 
-const Preview: React.FC<PreviewProps> = ({ code }) => {
+const Preview: React.FC<PreviewProps> = ({ code, err }) => {
   const iframe = useRef<any>();
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
   useEffect(() => {
     iframe.current.contentWindow.postMessage(code, "*");
   }, [code]);
+
   return (
     <div className="preview-wrapper">
       <iframe
@@ -21,6 +22,7 @@ const Preview: React.FC<PreviewProps> = ({ code }) => {
         sandbox="allow-scripts"
         srcDoc={previewHtml}
       />
+      {err && <div className="preview-error">{err}</div>}
     </div>
   );
 };

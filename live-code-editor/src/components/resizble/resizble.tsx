@@ -9,7 +9,7 @@ const Resizable: React.FC<ResizableProps> = ({ direction, children }) => {
   const [currentInnerWidth, setCurrentInnerWidth] = useState<number>(
     window.innerWidth
   );
-  const initalInnerWidth = useRef<number>(window.innerWidth);
+  const initalInnerWidth = useRef<number>(window.innerWidth); // save the value as ref (persistent)
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout>;

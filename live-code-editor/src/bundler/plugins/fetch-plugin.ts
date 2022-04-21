@@ -11,7 +11,7 @@ export const fetchPlugin = (inputCode: string) => {
     name: "fetch-plugin",
     setup(build: esbuild.PluginBuild) {
       build.onLoad({ filter: /.*/ }, async (args: any) => {
-        // Initiall check if the required file is already located in the IndexDB cache
+        // Initial check if the required file is already located in the IndexDB cache
         const catchedResult: esbuild.OnLoadResult | null =
           await fileCache.getItem(args.path);
         if (catchedResult) return catchedResult;
