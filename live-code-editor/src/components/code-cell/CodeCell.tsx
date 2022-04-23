@@ -1,21 +1,16 @@
 import "bulmaswatch/superhero/bulmaswatch.min.css";
 import { useEffect, useRef, useState } from "react";
-import CodeEditor from "../../components/code-editor/code-editor";
-import Preview from "../../components/preview/preview";
+import CodeEditor from "../code-editor/CodeEditor";
+import Preview from "../preview/Preview";
 import bundler from "../../bundler";
-import Resizable from "../resizble/resizble";
+import Resizable from "../resizble/Resizble";
 
 const CodeCell = () => {
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
   const [err, setErr] = useState("");
-  // const [isTyping, setIsTyping] = useState<boolean>(false);
+
   let timer = useRef<ReturnType<typeof setTimeout>>();
-  // const onClick = async () => {
-  //   console.log(input);
-  //   const output = await bundler(input);
-  //   setCode(output);
-  // };
 
   const handleTyping = (input: string) => {
     if (timer.current) clearTimeout(timer.current);
