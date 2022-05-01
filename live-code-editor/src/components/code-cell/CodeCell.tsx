@@ -8,7 +8,7 @@ import * as CellAction from "../../state/cells/cells-actions";
 import ActionBar from "../action-bar/ActionBar";
 import useActions from "../../hooks/useActions";
 
-const CodeCell = ({ cell }: { cell: Cell }) => {
+const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
   const [code, setCode] = useState("");
   const [err, setErr] = useState("");
 
@@ -39,9 +39,6 @@ const CodeCell = ({ cell }: { cell: Cell }) => {
             onChange={(value) => handleTyping(value)}
           />
         </Resizable>
-        {/* <div>
-          <button onClick={onClick}>Submit</button>
-        </div> */}
         <Preview code={code} err={err}></Preview>
       </div>
     </Resizable>

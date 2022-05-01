@@ -4,7 +4,11 @@ interface Cell {
   content: string;
 }
 
-type CELL_TYPE = "cell" | "code";
+type CELL_TYPE = "text" | "code";
+
+interface CodeCellProps {
+  cell: Cell;
+}
 
 interface CellState {
   loading: boolean;
@@ -24,7 +28,7 @@ type CellsType = "code" | "text";
 type CellsDiractionTypes = "up" | "down";
 
 interface CellsAction {
-  type: "DELETE_CELL" | "MOVE_CELL" | "INSERT_CELL_BEFORE" | "UPDATE_CELL";
+  type: "DELETE_CELL" | "MOVE_CELL" | "INSERT_CELL_AFTER" | "UPDATE_CELL";
   payload: {
     id: string;
     direction?: "up" | "down";

@@ -6,7 +6,7 @@ import * as CellsAction from "../../state/cells/cells-actions";
 import "./text-editor.scss";
 import ActionBar from "../action-bar/ActionBar";
 
-const TextEditor = ({ cell }: { cell: Cell }) => {
+const TextEditor: React.FC<Text_Editor_Props> = ({ cell }) => {
   const [editing, setEditing] = useState<boolean>(false);
   // const [source, setSource] = useState<string>("# Header");
   const ref = useRef<HTMLDivElement | null>(null);

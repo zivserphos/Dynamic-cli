@@ -1,18 +1,26 @@
 import produce from "immer";
 import * as ActionTypes from "./actions-types";
-import { nanoid } from "nanoid";
 import cellService from "./helpers";
 
-const initialTextCell = cellService.generateCell("text");
 const initialCodeCell = cellService.generateCell("code");
+const initialTextCell = cellService.generateCell("text");
+const secondCodeCell = cellService.generateCell("code");
+const secondTextCell = cellService.generateCell("text");
 
 const initialState: CellState = {
   loading: false,
   error: null,
-  order: [initialTextCell.id, initialCodeCell.id],
+  order: [
+    initialCodeCell.id,
+    initialTextCell.id,
+    secondCodeCell.id,
+    secondTextCell.id,
+  ],
   data: {
-    [initialTextCell.id]: initialTextCell,
     [initialCodeCell.id]: initialCodeCell,
+    [initialTextCell.id]: initialTextCell,
+    [secondCodeCell.id]: secondCodeCell,
+    [secondTextCell.id]: secondTextCell,
   },
 };
 
@@ -46,22 +54,19 @@ const reducer = produce(
         const { content } = action.payload;
         state.data[id].content = content || "";
         return state;
-      case ActionTypes.INSERT_CELL_BEFORE:
-        const newCell: Cell = {
-          type: action.payload.type,
-          content: "",
-          id: nanoid(),
-        };
+      case ActionTypes.INSERT_CELL_AFTER:
+        const newCell = cellService.generateCell(action.payload.type || "code");
+
         state.data[newCell.id] = newCell;
         if (!id) {
           // In case user didnt left id to the new cell to be inserted before cell will insert at the last of array
-          state.order.push(newCell.id);
+          state.order.unshift(newCell.id);
           return state;
         }
         const indexToBeInserted = state.order.findIndex(
           (cellId) => cellId === id
         );
-        state.order.splice(indexToBeInserted, 0, newCell.id); //   // Insert the cell exactly before the index provided by user
+        state.order.splice(indexToBeInserted + 1, 0, newCell.id); //   // Insert the cell exactly before the index provided by user
         return state;
       default:
         return state;

@@ -14,7 +14,7 @@ const updateCell = (state: CellState, id: string, content: string) => ({
 const generateCell = (cellType: CellsType) => ({
   type: cellType,
   id: nanoid(),
-  content: cellType === "code" ? "const a=5;" : "# Header",
+  content: cellType === "code" ? "const a=5;" : "click to edit",
 });
 
 export default { generateCell, updateCell };

@@ -19,11 +19,11 @@ export const moveCell = (
   },
 });
 
-export const insertCellBefore = (
+export const insertCellAfter = (
   id: string,
   cellType: CellsType
 ): CellsAction => ({
-  type: actionTypes.INSERT_CELL_BEFORE,
+  type: actionTypes.INSERT_CELL_AFTER,
   payload: {
     id,
     type: cellType,

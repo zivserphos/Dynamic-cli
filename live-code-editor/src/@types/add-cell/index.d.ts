@@ -1,0 +1,3 @@
+interface AddCellProps {
+  cellId: string;
+}
