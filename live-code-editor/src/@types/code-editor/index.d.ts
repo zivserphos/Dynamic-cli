@@ -1,4 +1,4 @@
 interface codeEditorProps {
-  initialValue: string;
+  initialValue?: string;
   onChange: (value: string) => void;
 }

@@ -1,12 +1,19 @@
 import produce from "immer";
 import * as ActionTypes from "./actions-types";
 import { nanoid } from "nanoid";
+import cellService from "./helpers";
+
+const initialTextCell = cellService.generateCell("text");
+const initialCodeCell = cellService.generateCell("code");
 
 const initialState: CellState = {
   loading: false,
   error: null,
-  order: [],
-  data: {},
+  order: [initialTextCell.id, initialCodeCell.id],
+  data: {
+    [initialTextCell.id]: initialTextCell,
+    [initialCodeCell.id]: initialCodeCell,
+  },
 };
 
 const reducer = produce(

@@ -1,11 +1,20 @@
 import MDEditor from "@uiw/react-md-editor";
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import useActions from "../../hooks/useActions";
+import * as CellsAction from "../../state/cells/cells-actions";
 import "./text-editor.scss";
+import ActionBar from "../action-bar/ActionBar";
 
-const TextEditor: React.FC = () => {
+const TextEditor = ({ cell }: { cell: Cell }) => {
   const [editing, setEditing] = useState<boolean>(false);
-  const [source, setSource] = useState<string>("# Header");
+  // const [source, setSource] = useState<string>("# Header");
   const ref = useRef<HTMLDivElement | null>(null);
+  const { updateCell } = useActions();
+
+  const { content: source } = useSelector(
+    (state: CombinedState) => state.cells.data[cell.id]
+  );
 
   useEffect(() => {
     const editingOutOfFocus = (event: MouseEvent) => {
@@ -24,13 +33,15 @@ const TextEditor: React.FC = () => {
       <MDEditor
         style={{ backgroundColor: "goldenrod" }}
         value={source}
-        onChange={(value) => setSource(value || "# Header")}
+        onChange={(value) => updateCell(cell.id, value || "# Header")}
       />
     </div>
   ) : (
     <div onClick={() => setEditing(true)} className="text-editor card">
       <div className="card-content">
+        {/* <ActionBar> */}
         <MDEditor.Markdown source={source} />
+        {/* </ActionBar> */}
       </div>
     </div>
   );

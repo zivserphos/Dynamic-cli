@@ -20,7 +20,7 @@ interface MoveCellAction {
   payload: {};
 }
 
-type CellsType = "cell" | "code";
+type CellsType = "code" | "text";
 type CellsDiractionTypes = "up" | "down";
 
 interface CellsAction {
@@ -30,6 +30,7 @@ interface CellsAction {
     direction?: "up" | "down";
     content?: string;
     type?: CellsType;
+    err?: any;
   };
 }
 

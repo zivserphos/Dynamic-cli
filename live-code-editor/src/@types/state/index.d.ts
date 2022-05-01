@@ -1,0 +1,3 @@
+interface CombinedState {
+  cells: CellState;
+}

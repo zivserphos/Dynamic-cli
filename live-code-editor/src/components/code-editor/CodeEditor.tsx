@@ -81,7 +81,7 @@ const CodeEditor: React.FC<codeEditorProps> = ({ initialValue, onChange }) => {
       <MonacoEditor
         // no onChange in this Component, built in the function above
         editorDidMount={onEditorDidMount}
-        value={initialValue}
+        value={initialValue || "const a = 5;"}
         options={{
           wordWrap: "on",
           minimap: { enabled: false },

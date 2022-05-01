@@ -1,0 +1,3 @@
+interface ActionBarProps {
+  cellId: string;
+}
