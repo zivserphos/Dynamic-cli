@@ -4,7 +4,7 @@ import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 import { fetchPlugin } from "./plugins/fetch-plugin";
 
 let service: esbuild.Service;
-const bundle = async (rawCode: string) => {
+const bundle = async (rawCode: string): Promise<BundleOutput> => {
   if (!service) {
     // initial setup for es build (resposible for the bundle process in the browser)
     service = await esbuild.startService({
