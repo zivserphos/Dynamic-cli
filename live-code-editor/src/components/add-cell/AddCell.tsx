@@ -1,11 +1,11 @@
 import React from "react";
 import "./add-cell.scss";
-import useActions from "../../hooks/useActions";
+import { useCellActions } from "../../hooks/useActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const AddCell: React.FC<AddCellProps> = ({ cellId }) => {
-  const { insertCellAfter } = useActions();
+  const { insertCellAfter } = useCellActions();
   return (
     <div className="add-cell">
       <button

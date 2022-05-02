@@ -1,5 +1,5 @@
 import React from "react";
-import useActions from "../../hooks/useActions";
+import { useCellActions } from "../../hooks/useActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowUp,
@@ -9,7 +9,7 @@ import {
 import "./action-bar.scss";
 
 const ActionBar: React.FC<ActionBarProps> = ({ cellId }) => {
-  const { moveCell, deleteCell } = useActions();
+  const { moveCell, deleteCell } = useCellActions();
   return (
     <div className="action-bar">
       <button

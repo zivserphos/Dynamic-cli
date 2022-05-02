@@ -1,18 +1,19 @@
 import "bulmaswatch/superhero/bulmaswatch.min.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import CodeEditor from "../code-editor/CodeEditor";
 import Preview from "../preview/Preview";
-import bundler from "../../bundler";
 import Resizable from "../resizble/Resizble";
-import * as CellAction from "../../state/cells/cells-actions";
-import ActionBar from "../action-bar/ActionBar";
-import useActions from "../../hooks/useActions";
+import { useCellActions, useBundleActions } from "../../hooks/useActions";
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const [code, setCode] = useState("");
-  const [err, setErr] = useState("");
+  // const [code, setCode] = useState("");
+  // const [err, setErr] = useState("");
+  const bundle = useSelector((state: CombinedState) => state.bundle);
+  console.log(bundle);
 
-  const { updateCell } = useActions();
+  const { updateCell } = useCellActions();
+  const { createBundle } = useBundleActions();
 
   let timer = useRef<ReturnType<typeof setTimeout>>();
 
@@ -23,12 +24,10 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
 
   useEffect(() => {
     const setOutput = async () => {
-      const output = await bundler(cell.content);
-      setCode(output.code);
-      setErr(output.err);
+      createBundle(cell.id, cell.content);
     };
     setOutput();
-  }, [cell.content]);
+  }, [cell.content, cell.id]);
 
   return (
     <Resizable direction="vertical">
@@ -39,7 +38,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onChange={(value) => handleTyping(value)}
           />
         </Resizable>
-        <Preview code={code} err={err}></Preview>
+        {/* <Preview code={code} err={err}></Preview> */}
       </div>
     </Resizable>
   );

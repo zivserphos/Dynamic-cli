@@ -1,7 +1,7 @@
 import MDEditor from "@uiw/react-md-editor";
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import useActions from "../../hooks/useActions";
+import { useCellActions } from "../../hooks/useActions";
 import * as CellsAction from "../../state/cells/cells-actions";
 import "./text-editor.scss";
 import ActionBar from "../action-bar/ActionBar";
@@ -10,7 +10,7 @@ const TextEditor: React.FC<Text_Editor_Props> = ({ cell }) => {
   const [editing, setEditing] = useState<boolean>(false);
   // const [source, setSource] = useState<string>("# Header");
   const ref = useRef<HTMLDivElement | null>(null);
-  const { updateCell } = useActions();
+  const { updateCell } = useCellActions();
 
   const { content: source } = useSelector(
     (state: CombinedState) => state.cells.data[cell.id]

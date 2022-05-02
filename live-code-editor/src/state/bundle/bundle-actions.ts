@@ -2,26 +2,21 @@ import { Dispatch } from "react";
 import bundle from "../../bundler";
 import * as bundleTypes from "./bundle-types";
 
-export const bundleComplete =
+export const createBundle =
   (cellId: string, input: string) =>
-  async (dispatch: Dispatch<BundleAction>): Promise<BundleAction> => {
-    const result = await bundle(input);
-    return {
+  async (dispatch: Dispatch<BundleAction>) => {
+    dispatch({
+      type: bundleTypes.BUNDLE_START,
+      payload: {
+        cellId,
+      },
+    });
+
+    dispatch({
       type: bundleTypes.BUNDLE_COMPLETE,
       payload: {
         cellId,
-        bundle: result,
+        bundle: await bundle(input),
       },
-    };
+    });
   };
-
-export const bundleStart = (
-  cellId: string,
-  bundle: { code: string; err: string }
-): BundleAction => ({
-  type: bundleTypes.BUNDLE_START,
-  payload: {
-    cellId,
-    bundle,
-  },
-});
