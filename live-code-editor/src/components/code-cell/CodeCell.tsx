@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "bulmaswatch/superhero/bulmaswatch.min.css";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
@@ -5,13 +6,10 @@ import CodeEditor from "../code-editor/CodeEditor";
 import Preview from "../preview/Preview";
 import Resizable from "../resizble/Resizble";
 import { useCellActions, useBundleActions } from "../../hooks/useActions";
+import "./code-cell.scss";
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  // const [code, setCode] = useState("");
-  // const [err, setErr] = useState("");
-  const bundle = useSelector((state: CombinedState) => state.bundle);
-  console.log(bundle);
-
+  const bundle = useSelector((state: CombinedState) => state.bundle[cell.id]);
   const { updateCell } = useCellActions();
   const { createBundle } = useBundleActions();
 
@@ -38,7 +36,24 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
             onChange={(value) => handleTyping(value)}
           />
         </Resizable>
-        {/* <Preview code={code} err={err}></Preview> */}
+        <div className="progress-wrapper">
+          {/* {bundle && !bundle.loading ? ( */}
+          {bundle && !bundle.loading ? (
+            <Preview code={bundle.code || ""} err={bundle.err || ""}></Preview>
+          ) : (
+            <div className="progress-cover">
+              <progress className="progress is-small is-primary" max="100">
+                Loading...
+              </progress>
+            </div>
+          )}
+          {/* ) : (
+          <div className="progress-cover">
+            <progress className="progress is-small is-primary" max="100">
+              Loading...
+            </progress>
+          </div> */}
+        </div>
       </div>
     </Resizable>
   );

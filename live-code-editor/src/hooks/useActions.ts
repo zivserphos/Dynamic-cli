@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
+import { useMemo } from "react";
 import * as CellAction from "../state/cells/cells-actions";
 import * as BundleAction from "../state/bundle/bundle-actions";
 
@@ -10,5 +11,6 @@ export const useCellActions = () => {
 
 export const useBundleActions = () => {
   const dispatch = useDispatch();
-  return bindActionCreators(BundleAction, dispatch);
+
+  return useMemo(() => bindActionCreators(BundleAction, dispatch), [dispatch]);
 };

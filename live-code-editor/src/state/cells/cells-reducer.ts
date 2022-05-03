@@ -13,14 +13,14 @@ const initialState: CellState = {
   order: [
     initialCodeCell.id,
     initialTextCell.id,
-    secondCodeCell.id,
-    secondTextCell.id,
+    // secondCodeCell.id,
+    // secondTextCell.id,
   ],
   data: {
     [initialCodeCell.id]: initialCodeCell,
     [initialTextCell.id]: initialTextCell,
-    [secondCodeCell.id]: secondCodeCell,
-    [secondTextCell.id]: secondTextCell,
+    // [secondCodeCell.id]: secondCodeCell,
+    // [secondTextCell.id]: secondTextCell,
   },
 };
 

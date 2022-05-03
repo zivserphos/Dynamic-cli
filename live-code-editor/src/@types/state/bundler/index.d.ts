@@ -10,11 +10,13 @@ interface BundleAction {
 }
 
 interface BundleState {
-  [key: string]: {
-    loading: boolean;
-    code: string;
-    err: string;
-  };
+  [key: string]:
+    | {
+        loading: boolean;
+        code: string;
+        err: string;
+      }
+    | undefined;
 }
 
 interface BundleOutput {

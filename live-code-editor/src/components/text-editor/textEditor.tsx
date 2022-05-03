@@ -2,9 +2,7 @@ import MDEditor from "@uiw/react-md-editor";
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useCellActions } from "../../hooks/useActions";
-import * as CellsAction from "../../state/cells/cells-actions";
 import "./text-editor.scss";
-import ActionBar from "../action-bar/ActionBar";
 
 const TextEditor: React.FC<Text_Editor_Props> = ({ cell }) => {
   const [editing, setEditing] = useState<boolean>(false);

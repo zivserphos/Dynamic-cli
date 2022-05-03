@@ -2,14 +2,15 @@ import React, { useEffect, useRef } from "react";
 import previewHtml from "../../utils/previewHtml";
 import "./preview.scss";
 
-const Preview: React.FC<PreviewProps> = ({ code, err }) => {
-  const iframe = useRef<any>();
+const Preview: React.FC<any> = ({ code, err, bundle }) => {
+  const iframe = useRef<any>(previewHtml(code));
+
+  // useEffect(() => {
+  //   iframe.current.srcdoc = previewHtml;
+  // }, []);
 
   useEffect(() => {
-    iframe.current.srcdoc = previewHtml;
-  }, []);
-
-  useEffect(() => {
+    console.log(code);
     iframe.current.contentWindow.postMessage(code, "*");
   }, [code]);
 
@@ -20,7 +21,7 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
         ref={iframe}
         title="user sandbox"
         sandbox="allow-scripts"
-        srcDoc={previewHtml}
+        srcDoc={previewHtml(code)}
       />
       {err && <div className="preview-error">{err}</div>}
     </div>

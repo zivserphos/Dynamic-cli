@@ -1,0 +1,27 @@
+.progress-wrapper {
+    height: 100%;
+    flex-grow: 1;
+    background-color: white;
+    .progress-cover {
+        height: 100%;
+        flex-grow: 1;
+        display: flex;
+        padding-left: 5%;
+        padding-right: 5%;
+        align-items: center;
+        background-color: white;
+        animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+}
