@@ -37,7 +37,6 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
           />
         </Resizable>
         <div className="progress-wrapper">
-          {/* {bundle && !bundle.loading ? ( */}
           {bundle && !bundle.loading ? (
             <Preview code={bundle.code || ""} err={bundle.err || ""}></Preview>
           ) : (
@@ -47,12 +46,6 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
               </progress>
             </div>
           )}
-          {/* ) : (
-          <div className="progress-cover">
-            <progress className="progress is-small is-primary" max="100">
-              Loading...
-            </progress>
-          </div> */}
         </div>
       </div>
     </Resizable>
