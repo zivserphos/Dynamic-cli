@@ -7,12 +7,28 @@ import Preview from "../preview/Preview";
 import Resizable from "../resizble/Resizble";
 import { useCellActions, useBundleActions } from "../../hooks/useActions";
 import "./code-cell.scss";
+import displayCodeByShow from "../../utils/displayCodeByShow";
+// import displayCodeByShow from "../../utils/displayCodeByShow";
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
   const bundle = useSelector((state: CombinedState) => state.bundle[cell.id]);
   const { updateCell } = useCellActions();
   const { createBundle } = useBundleActions();
-
+  const cumulativeCode = useSelector(({ cells }: { cells: CellState }) => {
+    const { data, order } = cells;
+    const orderedCells = order.map((id) => data[id]);
+    return orderedCells
+      .slice(
+        0,
+        orderedCells.findIndex((currentCell) => currentCell.id === cell.id) + 1
+      )
+      .reduce(
+        (accu: string[], currentCell) =>
+          currentCell.type === "code" ? [...accu, currentCell.content] : accu,
+        []
+      );
+  });
+  // cumulativeCode.unshift(displayCodeByShow);
   let timer = useRef<ReturnType<typeof setTimeout>>();
 
   const handleTyping = (input: string) => {
@@ -22,10 +38,10 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
 
   useEffect(() => {
     const setOutput = async () => {
-      createBundle(cell.id, cell.content);
+      createBundle(cell.id, cumulativeCode.join("\n"));
     };
     setOutput();
-  }, [cell.content, cell.id]);
+  }, [cell.content, cell.id, cumulativeCode.join("\n")]);
 
   return (
     <Resizable direction="vertical">

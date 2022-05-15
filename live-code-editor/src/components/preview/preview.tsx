@@ -10,6 +10,10 @@ const Preview: React.FC<PreviewProps> = ({ code, err }) => {
     iframe.current.contentWindow?.postMessage(code, "*");
   }, [code]);
 
+  useEffect(() => {
+    console.log(srcDoc.split("\n")[4690]);
+  }, [srcDoc]);
+
   return (
     <div className="preview-wrapper">
       <iframe

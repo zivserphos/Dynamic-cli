@@ -4,8 +4,8 @@ import cellService from "./helpers";
 
 const initialCodeCell = cellService.generateCell("code");
 const initialTextCell = cellService.generateCell("text");
-const secondCodeCell = cellService.generateCell("code");
-const secondTextCell = cellService.generateCell("text");
+// const secondCodeCell = cellService.generateCell("code");
+// const secondTextCell = cellService.generateCell("text");
 
 const initialState: CellState = {
   loading: false,

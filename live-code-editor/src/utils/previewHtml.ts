@@ -5,7 +5,24 @@ const previewHtml = (code: string) => `
       </head>
       <body>
         <div id="root"></div>
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
         <script>
+        const show = (value) => {
+        const root= document.querySelector("#root");
+        if (typeof value === 'object') { // display as an object
+            if (value.$$typeof && value.props) { // check if object is a jsx elment
+                ReactDOM.render(value ,root)
+                }
+            else {
+                root.innerHTML = JSON.stringify(value)
+            }
+          }
+        else {
+            root.innerHTML =value
+          }
+        }
         ${code}
           const handleError = (err) => {
               const root = document.querySelector('#root');
@@ -23,6 +40,7 @@ const previewHtml = (code: string) => `
               handleError(err)
             }
           }, false);
+          
         </script>
       </body>
     </html>
